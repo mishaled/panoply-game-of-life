@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("mocha");
 var chai_1 = require("chai");
 var _1 = require("./");
-var Cell_1 = require("./Cell");
 describe('Board', function () {
     describe('constructor', function () {
         it('not enough rows - should throw error', function () {
@@ -28,7 +27,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(0, 0);
+            var cell = new _1.Cell(0, 0);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 3;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -38,7 +37,7 @@ describe('Board', function () {
                 [false, true, true],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(0, 2);
+            var cell = new _1.Cell(0, 2);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 3;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -48,7 +47,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, true, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(2, 0);
+            var cell = new _1.Cell(2, 0);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 3;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -58,7 +57,7 @@ describe('Board', function () {
                 [false, true, true],
                 [false, true, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(2, 2);
+            var cell = new _1.Cell(2, 2);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 3;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -68,7 +67,7 @@ describe('Board', function () {
                 [true, false, true],
                 [true, true, true]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(1, 1);
+            var cell = new _1.Cell(1, 1);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 8;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -78,7 +77,7 @@ describe('Board', function () {
                 [true, true, true],
                 [true, true, true]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(1, 1);
+            var cell = new _1.Cell(1, 1);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 8;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -88,7 +87,7 @@ describe('Board', function () {
                 [true, true, true],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(0, 1);
+            var cell = new _1.Cell(0, 1);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 5;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -98,7 +97,7 @@ describe('Board', function () {
                 [false, true, false],
                 [true, true, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(1, 0);
+            var cell = new _1.Cell(1, 0);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 5;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -108,7 +107,7 @@ describe('Board', function () {
                 [false, true, false],
                 [false, true, true]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(1, 2);
+            var cell = new _1.Cell(1, 2);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 5;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -118,7 +117,7 @@ describe('Board', function () {
                 [true, true, true],
                 [true, false, true]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(2, 1);
+            var cell = new _1.Cell(2, 1);
             var actualNumber = board.GetNumberOfLivingNeighbors(cell);
             var expectedNumber = 5;
             chai_1.expect(actualNumber).to.be.equal(expectedNumber);
@@ -130,7 +129,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(-1, -1);
+            var cell = new _1.Cell(-1, -1);
             var cellExistsFunction = function () { board.SetCell(cell, false); };
             chai_1.expect(cellExistsFunction).to.throw('Cell does not exist!');
         });
@@ -139,7 +138,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(0, 0);
+            var cell = new _1.Cell(0, 0);
             var expectedState = true;
             board.SetCell(cell, expectedState);
             var actualState = board.GetCurrentCellState(cell);
@@ -150,7 +149,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(1, 0);
+            var cell = new _1.Cell(1, 0);
             var expectedState = false;
             board.SetCell(cell, expectedState);
             var actualState = board.GetCurrentCellState(cell);
@@ -163,7 +162,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(-1, -1);
+            var cell = new _1.Cell(-1, -1);
             var cellExistsFunction = function () { board.GetCurrentCellState(cell); };
             chai_1.expect(cellExistsFunction).to.throw('Cell does not exist!');
         });
@@ -172,7 +171,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(0, 0);
+            var cell = new _1.Cell(0, 0);
             var actualState = board.GetCurrentCellState(cell);
             var expectedState = false;
             chai_1.expect(actualState).to.be.equal(expectedState);
@@ -182,7 +181,7 @@ describe('Board', function () {
                 [true, true, false],
                 [false, false, false]];
             var board = new _1.Board(matrix);
-            var cell = new Cell_1.Cell(1, 0);
+            var cell = new _1.Cell(1, 0);
             var actualState = board.GetCurrentCellState(cell);
             var expectedState = true;
             chai_1.expect(actualState).to.be.equal(expectedState);

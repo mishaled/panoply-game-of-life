@@ -1,7 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Board } from './';
-import { Cell } from './Cell';
+import { Cell, Board } from './';
 
 describe('Board', () => {
     describe('constructor', () => {

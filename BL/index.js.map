@@ -1,0 +1,1 @@
+{"version":3,"sources":["BL/index.ts"],"names":[],"mappings":";;AAAA,2CAA0C;AAAjC,kCAAA,UAAU,CAAA","file":"index.js","sourcesContent":["export { GameOfLife } from './GameOfLife';"]}
