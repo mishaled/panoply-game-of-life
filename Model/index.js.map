@@ -1,1 +1,1 @@
-{"version":3,"sources":["Model/index.ts"],"names":[],"mappings":";;AAAA,iCAAgC;AAAvB,wBAAA,KAAK,CAAA","file":"index.js","sourcesContent":["export { Board } from './Board';"]}
+{"version":3,"sources":["Model/index.ts"],"names":[],"mappings":";;AAAA,iCAAgC;AAAvB,wBAAA,KAAK,CAAA;AACd,+BAA8B;AAArB,sBAAA,IAAI,CAAA","file":"index.js","sourcesContent":["export { Board } from './Board';\r\nexport { Cell } from './Cell';"]}

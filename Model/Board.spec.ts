@@ -1,7 +1,7 @@
 import 'mocha';
-import * as lodash from 'lodash';
 import { expect } from 'chai';
 import { Board } from './';
+import { Cell } from './Cell';
 
 describe('Board', () => {
     describe('constructor', () => {
@@ -36,8 +36,8 @@ describe('Board', () => {
                 [false, false, false]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(0, 0);
+            let cell = new Cell(0, 0);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 3;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -50,8 +50,8 @@ describe('Board', () => {
                 [false, false, false]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(0, 2);
+            let cell = new Cell(0, 2);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 3;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -64,8 +64,8 @@ describe('Board', () => {
                 [false, true, false]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(2, 0);
+            let cell = new Cell(2, 0);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 3;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -78,8 +78,8 @@ describe('Board', () => {
                 [false, true, false]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(2, 2);
+            let cell = new Cell(2, 2);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 3;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -92,8 +92,8 @@ describe('Board', () => {
                 [true, true, true]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(1, 1);
+            let cell = new Cell(1, 1);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 8;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -106,8 +106,8 @@ describe('Board', () => {
                 [true, true, true]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(1, 1);
+            let cell = new Cell(1, 1);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 8;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -120,8 +120,8 @@ describe('Board', () => {
                 [false, false, false]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(0, 1);
+            let cell = new Cell(0, 1);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 5;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -134,8 +134,8 @@ describe('Board', () => {
                 [true, true, false]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(1, 0);
+            let cell = new Cell(1, 0);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 5;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -148,8 +148,8 @@ describe('Board', () => {
                 [false, true, true]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(1, 2);
+            let cell = new Cell(1, 2);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 5;
 
             expect(actualNumber).to.be.equal(expectedNumber);
@@ -162,11 +162,99 @@ describe('Board', () => {
                 [true, false, true]];
 
             let board = new Board(matrix);
-
-            let actualNumber = board.GetNumberOfLivingNeighbors(2, 1);
+            let cell = new Cell(2, 1);
+            let actualNumber = board.GetNumberOfLivingNeighbors(cell);
             let expectedNumber = 5;
 
             expect(actualNumber).to.be.equal(expectedNumber);
+        });
+    });
+
+    describe('SetCell', () => {
+        it('cell does not exist - should throw exception', () => {
+            let matrix =
+                [[false, true, false],
+                [true, true, false],
+                [false, false, false]];
+
+            let board = new Board(matrix);
+            let cell = new Cell(-1, -1);
+            let cellExistsFunction = function () { board.SetCell(cell, false) };
+
+            expect(cellExistsFunction).to.throw('Cell does not exist!');
+        });
+
+        it('set to true - should return true', () => {
+            let matrix =
+                [[false, true, false],
+                [true, true, false],
+                [false, false, false]];
+
+            let board = new Board(matrix);
+            let cell = new Cell(0, 0);
+            let expectedState = true;
+            board.SetCell(cell, expectedState);
+            let actualState = board.GetCurrentCellState(cell);
+
+            expect(actualState).to.be.equal(expectedState);
+        });
+
+        it('set to false - should return false', () => {
+            let matrix =
+                [[false, true, false],
+                [true, true, false],
+                [false, false, false]];
+
+            let board = new Board(matrix);
+            let cell = new Cell(1, 0);
+            let expectedState = false;
+            board.SetCell(cell, expectedState);
+            let actualState = board.GetCurrentCellState(cell);
+
+            expect(actualState).to.be.equal(expectedState);
+        });
+    });
+
+    describe('GetCurrentCellState', () => {
+        it('cell does not exist - should throw exception', () => {
+            let matrix =
+                [[false, true, false],
+                [true, true, false],
+                [false, false, false]];
+
+            let board = new Board(matrix);
+            let cell = new Cell(-1, -1);
+            let cellExistsFunction = function () { board.GetCurrentCellState(cell) };
+
+            expect(cellExistsFunction).to.throw('Cell does not exist!');
+        });
+
+        it('cell is dead - should return false', () => {
+            let matrix =
+                [[false, true, false],
+                [true, true, false],
+                [false, false, false]];
+
+            let board = new Board(matrix);
+            let cell = new Cell(0, 0);
+            let actualState = board.GetCurrentCellState(cell);
+            let expectedState = false;
+
+            expect(actualState).to.be.equal(expectedState);
+        });
+
+        it('cell is alive - should return true', () => {
+            let matrix =
+                [[false, true, false],
+                [true, true, false],
+                [false, false, false]];
+
+            let board = new Board(matrix);
+            let cell = new Cell(1, 0);
+            let actualState = board.GetCurrentCellState(cell);
+            let expectedState = true;
+
+            expect(actualState).to.be.equal(expectedState);
         });
     });
 });

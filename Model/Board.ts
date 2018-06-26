@@ -1,3 +1,5 @@
+import { Cell } from './';
+
 export class Board {
     private _matrix: boolean[][];
     private _rowsCount: number;
@@ -19,16 +21,17 @@ export class Board {
         this._matrix = matrix;
     }
 
-    public GetNumberOfLivingNeighbors(cellRow: number, cellColumn: number): number {
+    public GetNumberOfLivingNeighbors(cell: Cell): number {
         let numberOfLivingNeighbors = 0;
 
-        if (cellRow >= this._rowsCount || cellColumn >= this._columnsCount) {
+        if (cell.i >= this._rowsCount || cell.j >= this._columnsCount) {
             throw "No such cell!";
         }
 
-        for (let i = cellRow - 1; i <= cellRow + 1; i++) {
-            for (let j = cellColumn - 1; j <= cellColumn + 1; j++) {
-                if (!this.DoesNeighborExistAndNotTheCellItself(i, j, cellRow, cellColumn)) {
+        for (let i = cell.i - 1; i <= cell.i + 1; i++) {
+            for (let j = cell.j - 1; j <= cell.j + 1; j++) {
+                let neightbor = new Cell(i, j);
+                if (!this.DoesNeighborExistAndNotTheCellItself(neightbor, cell)) {
                     continue;
                 }
 
@@ -39,21 +42,50 @@ export class Board {
         return numberOfLivingNeighbors;
     }
 
-    private DoesNeighborExistAndNotTheCellItself(i: number, j: number, cellRow: number, cellColumn: number): boolean {
-        return this.DoesCellExist(i, j) &&
-            !this.IsTheSameCell(i, j, cellRow, cellColumn);
+    public GetCurrentCellState(cell: Cell): boolean {
+        if (!this.DoesCellExist(cell)) {
+            throw 'Cell does not exist!';
+        }
+
+        return this._matrix[cell.i][cell.j];
+    }
+
+    public SetCell(cell: Cell, newState: boolean) {
+        if (!this.DoesCellExist(cell)) {
+            throw 'Cell does not exist!';
+        }
+
+        this._matrix[cell.i][cell.j] = newState;
+    }
+
+    public GetAllCells() {
+        let cells: Cell[] = [];
+
+        for (let i = 0; i < this._rowsCount; i++) {
+            for (let j = 0; j < this._columnsCount; j++) {
+                let currentCell = new Cell(i, j, this._matrix[i][j]);
+                cells.push(currentCell);
+            }
+        }
+
+        return cells;
+    }
+
+    private DoesNeighborExistAndNotTheCellItself(neighbor: Cell, cell: Cell): boolean {
+        return this.DoesCellExist(neighbor) &&
+            !this.IsTheSameCell(neighbor, cell);
 
     }
 
-    private IsTheSameCell(i: number, j: number, cellRow: number, cellColumn: number): boolean {
-        return cellRow == i &&
-            cellColumn == j;
+    private IsTheSameCell(cell1: Cell, cell2: Cell): boolean {
+        return cell1.i == cell2.i &&
+            cell1.j == cell2.j;
     }
 
-    private DoesCellExist(cellRow: number, cellColumn: number): boolean {
-        return cellRow >= 0 &&
-            cellColumn >= 0 &&
-            cellRow <= this._rowsCount - 1 &&
-            cellColumn <= this._columnsCount - 1;
+    private DoesCellExist(cell: Cell): boolean {
+        return cell.i >= 0 &&
+            cell.j >= 0 &&
+            cell.i <= this._rowsCount - 1 &&
+            cell.j <= this._columnsCount - 1;
     }
 }

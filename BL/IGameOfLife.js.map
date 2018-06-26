@@ -1,1 +1,1 @@
-{"version":3,"sources":["BL/IGameOfLife.ts"],"names":[],"mappings":"","file":"IGameOfLife.js","sourcesContent":["import { Board } from \"../Model\";\r\n\r\nexport interface IGameOfLife {\r\n    GetCurrentState(): Board;\r\n    ComputeNextState(): Board;\r\n}"]}
+{"version":3,"sources":["BL/IGameOfLife.ts"],"names":[],"mappings":"","file":"IGameOfLife.js","sourcesContent":["import { Board } from \"../Model\";\r\n\r\nexport interface IGameOfLife {\r\n    Run();\r\n    GetCurrentState(): Board;\r\n    ComputeNextState(): Board;\r\n}"]}
