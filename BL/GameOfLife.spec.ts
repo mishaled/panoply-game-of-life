@@ -218,7 +218,6 @@ describe('GameOfLife', () => {
             let nextBoard = game.Run(expectedIterationCount);
 
             expect(computeNextStateSpy.callCount).to.be.equal(expectedIterationCount);
-
         });
     });
 });
