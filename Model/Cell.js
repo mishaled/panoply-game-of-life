@@ -9,5 +9,4 @@ var Cell = /** @class */ (function () {
     return Cell;
 }());
 exports.Cell = Cell;
-
 //# sourceMappingURL=Cell.js.map

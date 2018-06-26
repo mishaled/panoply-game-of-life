@@ -68,5 +68,4 @@ var Board = /** @class */ (function () {
     return Board;
 }());
 exports.Board = Board;
-
 //# sourceMappingURL=Board.js.map

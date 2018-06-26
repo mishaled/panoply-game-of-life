@@ -5,10 +5,12 @@ var GameOfLife = /** @class */ (function () {
     function GameOfLife(seed) {
         this._currentState = seed;
     }
-    GameOfLife.prototype.Run = function () {
-        while (true) {
-            this._currentState = this.ComputeNextState();
+    GameOfLife.prototype.Run = function (maxIterations) {
+        if (maxIterations == 0) {
+            return;
         }
+        this._currentState = this.ComputeNextState();
+        this.Run(maxIterations == undefined ? maxIterations : maxIterations - 1);
     };
     GameOfLife.prototype.GetCurrentState = function () {
         return this._currentState;
@@ -49,5 +51,4 @@ var GameOfLife = /** @class */ (function () {
     return GameOfLife;
 }());
 exports.GameOfLife = GameOfLife;
-
 //# sourceMappingURL=GameOfLife.js.map

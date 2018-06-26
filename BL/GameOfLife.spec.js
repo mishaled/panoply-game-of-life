@@ -4,6 +4,7 @@ require("mocha");
 var chai_1 = require("chai");
 var Model_1 = require("../Model");
 var _1 = require("./");
+var sinon = require("sinon");
 describe('GameOfLife', function () {
     describe('constructor', function () {
         it('should initialize seed correctly', function () {
@@ -138,6 +139,18 @@ describe('GameOfLife', function () {
             });
         });
     });
+    describe('Run', function () {
+        it('should call ComputeNextState correct number of times', function () {
+            var matrix = [[false, false, false],
+                [false, true, false],
+                [false, false, false]];
+            var expectedBoard = new Model_1.Board(matrix);
+            var game = new _1.GameOfLife(expectedBoard);
+            var computeNextStateSpy = sinon.spy(game, 'ComputeNextState');
+            var expectedIterationCount = 3;
+            var nextBoard = game.Run(expectedIterationCount);
+            chai_1.expect(computeNextStateSpy.callCount).to.be.equal(expectedIterationCount);
+        });
+    });
 });
-
 //# sourceMappingURL=GameOfLife.spec.js.map

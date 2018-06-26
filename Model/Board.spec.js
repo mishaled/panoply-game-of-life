@@ -188,5 +188,4 @@ describe('Board', function () {
         });
     });
 });
-
 //# sourceMappingURL=Board.spec.js.map

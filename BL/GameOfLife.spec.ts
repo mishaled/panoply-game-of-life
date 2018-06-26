@@ -2,6 +2,7 @@ import 'mocha';
 import { expect } from 'chai';
 import { Cell, Board } from '../Model';
 import { GameOfLife } from './';
+import sinon = require('sinon');
 
 describe('GameOfLife', () => {
     describe('constructor', () => {
@@ -43,7 +44,7 @@ describe('GameOfLife', () => {
 
                 computeNextStateBaseCheck(matrix, false);
             });
-            
+
             it('with 1 living neighbor - should die', () => {
                 let matrix =
                     [[false, false, false],
@@ -198,6 +199,26 @@ describe('GameOfLife', () => {
 
                 computeNextStateBaseCheck(matrix, false);
             });
+        });
+    });
+
+    describe('Run', () => {
+        it('should call ComputeNextState correct number of times', () => {
+            let matrix =
+                [[false, false, false],
+                [false, true, false],
+                [false, false, false]];
+
+            let expectedBoard = new Board(matrix);
+
+            let game = new GameOfLife(expectedBoard);
+
+            let computeNextStateSpy = sinon.spy(game, 'ComputeNextState');
+            let expectedIterationCount = 3;
+            let nextBoard = game.Run(expectedIterationCount);
+
+            expect(computeNextStateSpy.callCount).to.be.equal(expectedIterationCount);
+
         });
     });
 });

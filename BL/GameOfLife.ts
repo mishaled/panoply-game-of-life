@@ -9,12 +9,15 @@ export class GameOfLife implements IGameOfLife {
         this._currentState = seed;
     }
 
-    public Run() {
-        while (true) {
-            this._currentState = this.ComputeNextState();
+    Run(maxIterations?: number) {
+        if (maxIterations == 0) {
+            return;
         }
+
+        this._currentState = this.ComputeNextState();
+        this.Run(maxIterations == undefined ? maxIterations : maxIterations - 1);
     }
-    
+
     public GetCurrentState(): Board {
         return this._currentState;
     }
